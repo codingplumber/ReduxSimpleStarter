@@ -11,7 +11,14 @@ import VideoListItem from './video_list_item';
 // list items must have a key so that react knows which element to update
 const VideoList = (props) => {
   const videoItems = props.videos.map(video => {
-    return <VideoListItem key={video.etag} video={video} />
+    return (
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        key={video.etag}
+        video={video}
+        // onVideoSelect is being passed through to VideoListItem
+      />
+    );
   });
 
   return (

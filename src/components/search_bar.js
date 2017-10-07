@@ -10,6 +10,7 @@ class SearchBar extends Component {
   constructor(props) {
     // super is a method on the parent class React.component
     super(props);
+
     // initialization of state
     // term is a property on this state object
     this.state = { term: '' };
@@ -17,13 +18,21 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="search-bar">
         <input
           value={this.state.term}
-          onChange={event => this.setState({ term: event.target.value })}
+          onChange={event => this.onInputChange(event.target.value)}
         />
       </div>
     );
+  }
+
+  // set state with the term - this.setState({term});
+  // and call the callback from App (index.js) to set its videos state
+  // with the new term - this.props.onSearchTermChange(term);
+  onInputChange(term) {
+    this.setState({term});
+    this.props.onSearchTermChange(term);
   }
 
   // when we tell the input that its value is this.state.term we are turning it
@@ -34,7 +43,7 @@ class SearchBar extends Component {
   // its value changes when the state changes
   // this.setState({ term: event.target.value }) - how we update state
   // ^ onChange={this.onInputChange} - watching change event on the input
-  // see react docs for other events
+  // see react docs for other events (this has been split out to a separate method now)
   // V event handler - whenever input changes run the code inside of here
   // event handlers are always called with an event object
   // the event describes info about the event that occured
